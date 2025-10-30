@@ -2,7 +2,7 @@ import pandas as pd
 from collections import defaultdict
 from typing import Optional, Dict, Tuple
 
-# ---------- helpers ----------
+
 def _expected(ra: float, rb: float) -> float:
     return 1.0 / (1.0 + 10 ** ((rb - ra) / 400.0))
 
@@ -50,15 +50,14 @@ def _surface_keys(pa: int, pb: int, surface: Optional[str]) -> Tuple[Tuple[int, 
 def calculate_general_elo(
     df: pd.DataFrame,
     *,
-    start_elo: float = 1500.0,
-    # overall K
+    start_elo: float = 1250.0,
     k_overall_base: float = 32.0,
     k_overall_min: float = 16.0,
-    k_linear_drop_matches: int = 100,
+    k_linear_drop_matches: int = 30,
     # surface K (driven by per-surface matches; smaller by default)
     k_surface_base: float = 20.0,
     k_surface_min: float = 10.0,
-    k_surface_drop_matches: int = 30,
+    k_surface_drop_matches: int = 10,
     # event weighting
     event_weight_col: Optional[str] = None,
     event_weight_map: Optional[Dict[str, float]] = None,
